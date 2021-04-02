@@ -96,8 +96,15 @@ function! s:PresentResultsAndChooseFile(findResults) abort
     endfor
 
     let selection = inputlist(findResultsWithNumber)
-    return [0, findResultsSorted[selection]]
+    if selection >=# 0 && selection <# len(findResultsSorted)
+      return [0, findResultsSorted[selection]]
+    else
+      echom ' Error: Selection ' . selection . ' is out of range.'
+    endif
+
   endif
+
+  return [-1, '']
 endfunction
 
 function! s:BuildSearchCommand(fileParts, switchToType) abort
