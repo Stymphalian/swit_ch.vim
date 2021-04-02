@@ -150,7 +150,6 @@ function! swit_ch#SwitchBetweenFiles(switchToType) abort
   " Function to switch to the 'other' file, which could be:
   " the <file>_test.cxx, <file>.cxx, or <file>.hxx
   let fileParts = <SID>ParseFilenameToParts(expand("%:p"))
-  echo fileParts
 
   if fileParts['type'] ==# a:switchToType
     echom "Not switching to same type of file"
