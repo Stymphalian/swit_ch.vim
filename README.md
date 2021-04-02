@@ -1,4 +1,6 @@
-# swit_ch - vim plugin to switch between c++ header, impl, and test files
+# swit_ch.vim
+
+Easily switch betwen your C/C++ header, implementation and test files.
 
 ## Install
 Install using whatever vim plugin manager you use. I've been using vim-plug
@@ -12,7 +14,7 @@ call plug#end()
 ## How it works
 swit_ch will look for the corresponding C/C++ header, implementation. and test
 file starting from the top level .git root directory. It will try to match a 
-regex to find the to the correct basename of your filename.
+regex to find corresponding file using the 'basename' of your file.
 
 For example:
 If current filename is /my/git/repo/sub/dir/my_file.cpp, and you want to 
@@ -31,4 +33,4 @@ The plugin setups an autocmd for cpp FileTypes and by default adds key mappings.
 <leader>lt  - to switch to the test file
 ```
 
-Please read the vim doc for other configuration.
+Please read the vim doc for other configuration `:help swit_ch.txt`
