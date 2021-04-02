@@ -1,0 +1,67 @@
+*swit_ch.txt*  C/C++ file switching
+
+                             Swit (C) (H)eaders
+                            C/C++ file switching
+Author: Jordan Yu
+Repository: https://github.com/Stymphalian/swit_ch.vim
+Last Update: 2021/04/02
+License: MIT
+
+==============================================================================
+OVERVIEW                                                             *swit_ch*
+
+Allow you to switch between your C/C++ header,implementation and test files.
+It does by using `fd` to find the corresponding header, and searchs from the 
+root git directory (configurable).
+
+To use:
+   <leader>lc  switches to your cpp file in a new buffer
+   <leader>lh  switches to your .h file in a new buffer
+   <leader>lt  switches to your _test.cpp file in a new buffer
+
+==============================================================================
+DEFALT MAPPINGS                                             *swit_ch-mappings*
+
+By default we setup some bindings in an autogroup when we detect a cpp FileType
+Remap as necessary and disable using `g:swit_ch_vim_useDefaultMappings`
+
+augroup swit_ch_vim_c_group
+ autocmd!
+ autocmd FileType cpp nmap <silent> <buffer> <leader>lc <Plug>switch_Impl
+ autocmd FileType cpp nmap <silent> <buffer> <leader>lt <Plug>switch_Test
+ autocmd FileType cpp nmap <silent> <buffer> <leader>lh <Plug>switch_Header
+augroup END
+
+==============================================================================
+CONFIGURATION                                                 *swit_ch-config*
+
+g:swit_ch_vim_cxxExtensions = ["c", "cc", "cpp"]
+g:swit_ch_vim_hxxExtensions = ["h", "hpp"]
+
+    Tells us which c++ extension to look for when switching between files.
+
+let g:swit_ch_vim_excludeDirectories = []
+
+    Pass these directories to the -E argument of the 'fd' command
+    Each entry is a separate -E <arg> that will be passed to the <fd> 
+    command line. See the `man fd` documenation for the syntax of each line.
+
+let g:swit_ch_vim_searchFromGitRoot = 1
+
+    Whether to search for the .git root directory and begin the search for
+    files from the root directory.
+    0 - Disable search from the root git directory. Search only in the present
+        working directoy of the vim editor.
+    1 - [default] Enable searching for the files from the root git directory.
+
+let g:swit_ch_vim_useDefaultMappings = 1
+   Use default autocmd group mappings. If true then we automatically
+   setup bindings when the buffer filetype is cpp, and add some key 
+   binndings to switch between them.
+
+   0 - Disable the bindings. See |swit_ch-mappings| for instructions on 
+       seting up your own.
+   1 - Enable default bindings. 
+
+==============================================================================
+vim:tw=78:ts=8:ft=help:noet:nospell
