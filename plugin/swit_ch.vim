@@ -13,22 +13,32 @@ set cpo&vim " reset them to defaults
 " --------------
 
 " Tells us which c++ extension to look for when switching between files
-let g:swit_ch_vim_cxxExtensions = ["c", "cc", "cpp"]
-let g:swit_ch_vim_hxxExtensions = ["h", "hpp"]
+if !exists('g:swit_ch_vim_cxxExtensions')
+  let g:swit_ch_vim_cxxExtensions = ["c", "cc", "cpp"]
+endif
+if !exists('g:swit_ch_vim_hxxExtensions')
+  let g:swit_ch_vim_hxxExtensions = ["h", "hpp"]
+endif
 
 " Pass these directories to the -E argument of the 'fd' command
 " Each entry is a separate -E <arg> that will be passed to the <fd> 
 " command line
-let g:swit_ch_vim_excludeDirectories = []
+if !exists('g:swit_ch_vim_excludeDirectories')
+  let g:swit_ch_vim_excludeDirectories = []
+endif
 
 " Whether to search for the .git root directory and begin the search for
 " files from the root directory
-let g:swit_ch_vim_searchFromGitRoot = 1
+if !exists('g:swit_ch_vim_searchFromGitRoot')
+  let g:swit_ch_vim_searchFromGitRoot = 1
+endif
 
 " Use default autocmd group mappings. If true then we automatically
 " setup bindings when the buffer filetype is cpp, and add some key 
 " binndings to switch between them.
-let g:swit_ch_vim_useDefaultMappings = 1
+if !exists('g:swit_ch_vim_useDefaultMappings')
+  let g:swit_ch_vim_useDefaultMappings = 1
+endif
 
 " --------------
 " End Configurable options
@@ -143,7 +153,6 @@ function! s:BuildSearchCommand(fileParts, switchToType) abort
       let excludeDirs = ' -E' . shellescape(dir) . ' '
     endfor
   endif
-  echom excludeDirs
 
   " -p option is so that we can apply our search pattern on the full filepaths
   " searchName - is the regex for the file
